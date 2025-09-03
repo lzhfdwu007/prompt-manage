@@ -6,9 +6,10 @@ from flask import Flask, render_template, request, redirect, url_for, flash, sen
 from werkzeug.utils import secure_filename
 from io import BytesIO
 
-
-# Database path: allow override via env, default to container volume
-DB_PATH = os.environ.get('DB_PATH', '/app/data/data.sqlite3')
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+DEFAULT_DB_PATH = os.path.join(BASE_DIR, 'app', 'data', 'data.sqlite3')
+DB_PATH = os.environ.get('DB_PATH', DEFAULT_DB_PATH)
+# --- 动态路径修改结束 ---
 
 
 def get_db():
